@@ -56,7 +56,22 @@
   (with-gensyms
     (string)
     `(let ((,string (string-upcase (desc-string ,func))))
-       (concatenate 'string "DECLARED TYPE: "
-		    (parse-parens (subseq ,string (string-contains-brute "DECLARED TYPE" ,string)))
+       (let (posp (string-contains-brute "DECLARED TYPE" ,string))
+	 (if posp
+	   (concatenate 'string "DECLARED TYPE: "
+			(parse-parens (subseq ,string posp)))
+	   "NOT A FUNC!!!")
        ))))
+
+(defun parse-word (str)
+  (defun word (str &optional (acc nil))
+    (cond 
+      ((char= (car str) #\() (word (cdr str)))
+      ((member (car str) '(#\space #\newline #\))) acc)
+      (t (word (cdr str) (cons (car str) acc)))))
+  (coerce (reverse  (cond
+		      ((stringp str) (word (coerce str 'list)))
+		      ((symbolp str) (word (string str)))
+		      ((listp str) (word str)))) 'string))
+
 
