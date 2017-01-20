@@ -1,10 +1,10 @@
 (defpackage clyde
-  (:use #:cl
-	#:ltk
-	#:alexandria
-	#:cl-string-match
-	#:colorize)
-  (:export :main
-	   :get-lambda-list
-	   :get-declared-types))
-	
+  (:use	#:cl-string-match
+				#:alexandria
+				#:cl-string-complete	
+				#:colorize
+				#:cl
+				#:common-lisp-user
+				#:ltk)
+	(:shadow #:uiop)
+  )

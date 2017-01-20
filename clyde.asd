@@ -1,16 +1,19 @@
+(in-package :asdf)
 
 (defsystem clyde
-	   :author "Tommy Lawlor"
-	   :version "0.0.0"
-	   :licence "MIT"
-	   :depends-on ("ltk"
-			"cl-fad"
-			"alexandria"
-			"cl-string-match"
-			"colorize")
-	   :serial t
-	   :components ((:file "package")
-			(:file "utils")
-			(:file "sources")
-			(:file "main")))
-			
+					 :description "clyde, a Common Lisp IDE"
+					 :version "0.0.1"
+					 :author "Thomas Lawlor <tominoz99@gmail.com>"
+					 :licence "MIT"
+					 :depends-on ("ltk" "cl-string-match"
+												"cl-vectors" "osicat"
+												"alexandria"
+												"colorize"
+												"uiop"
+												"cl-string-complete")
+					 :serial t
+					 :components ((:file "gui")
+												(:file "package")
+												(:file "widgets")
+												(:file "sources")
+												(:file "main")))

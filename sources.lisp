@@ -44,8 +44,7 @@
 
 (defmacro get-lambda-list (func)
   "gets the names of input variables to functions"
-  (with-gensyms 
-    (string)
+	(let ((string (gensym)))
     `(let ((,string (string-upcase (desc-string ,func))))
        (with-input-from-string (x ,string
 				    :start (string-contains-brute "LAMBDA-LIST:" ,string))
@@ -53,25 +52,9 @@
 
 (defmacro get-declared-types (func)
   "gets the declared type of func"
-  (with-gensyms
-    (string)
+  (let ((string (gensym)))
     `(let ((,string (string-upcase (desc-string ,func))))
-       (let (posp (string-contains-brute "DECLARED TYPE" ,string))
-	 (if posp
-	   (concatenate 'string "DECLARED TYPE: "
-			(parse-parens (subseq ,string posp)))
-	   "NOT A FUNC!!!")
+       (concatenate 'string "DECLARED TYPE: "
+		    (parse-parens (subseq ,string (string-contains-brute "DECLARED TYPE" ,string)))
        ))))
-
-(defun parse-word (str)
-  (defun word (str &optional (acc nil))
-    (cond 
-      ((char= (car str) #\() (word (cdr str)))
-      ((member (car str) '(#\space #\newline #\))) acc)
-      (t (word (cdr str) (cons (car str) acc)))))
-  (coerce (reverse  (cond
-		      ((stringp str) (word (coerce str 'list)))
-		      ((symbolp str) (word (string str)))
-		      ((listp str) (word str)))) 'string))
-
 
