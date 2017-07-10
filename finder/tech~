@@ -1,0 +1,17 @@
+
+* Vars  
+
+** *available-symbols*
+
+*** Stores the present symbols of the current package
+*** as a list of strings and is equal to 
+*** (loop for x being each symbol of *package*
+***       collect (format nil "~a" x))
+
+* Funcs
+
+** 
+
+** Bob
+
+** Test

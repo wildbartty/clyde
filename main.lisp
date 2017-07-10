@@ -40,5 +40,3 @@
 (define-superapp-command (com-parity :name t) ((number integer))
   (format t "~a is ~a~%" number
 	  (if (oddp number) "odd" "even")))
-
-

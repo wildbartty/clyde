@@ -1,0 +1,8 @@
+(in-package :cl-user)
+
+(defpackage clyde-finder
+  (:use #:clim
+	#:clim-user
+	#:cl-ppcre))
+
+	
